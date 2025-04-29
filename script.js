@@ -163,7 +163,7 @@ function renderQuestion() {
       ${q.choices
         .map(
           (choice, index) => `
-        <button onclick="selectAnswer('${choice}')">${choice}</button>
+        <button onclick="selectAnswer('${choice}')" id="choice-${index}">${choice}</button>
       `
         )
         .join("")}
