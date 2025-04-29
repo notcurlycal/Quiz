@@ -72,6 +72,9 @@ function createQuiz() {
 
     container.appendChild(section);
   });
+
+  createOutroPage();
+  createFinalPage();
 }
 
 function createTitleScreen() {
@@ -98,10 +101,90 @@ function createTitleScreen() {
   container.appendChild(titleScreen);
 }
 
+function createOutroPage() {
+  const outro = document.createElement("section");
+  outro.className = "page";
+
+  const h2 = document.createElement("h2");
+  h2.textContent = "Your Results";
+  outro.appendChild(h2);
+
+  const p = document.createElement("p");
+  p.id = "results";
+  outro.appendChild(p);
+
+  const smallText = document.createElement("p");
+  smallText.innerText = "Thanks for playing and now we can play roblox or watch me play ultrakill, but now instead of you telling me, 'You pick' instead.. You are picking.";
+  outro.appendChild(smallText);
+
+  container.appendChild(outro);
+}
+
+function createFinalPage() {
+  const finalPage = document.createElement("section");
+  finalPage.className = "page";
+
+  const h2 = document.createElement("h2");
+  h2.style.color = "red";
+  h2.style.fontFamily = "cursive";
+  h2.textContent = "FINAL QUESTION";
+  finalPage.appendChild(h2);
+
+  const small = document.createElement("p");
+  small.style.color = "red";
+  small.style.fontFamily = "cursive";
+  small.innerText = "Choose now.";
+  finalPage.appendChild(small);
+
+  ["Roblox", "Ultrakill"].forEach(option => {
+    const btn = document.createElement("button");
+    btn.textContent = option;
+    btn.onclick = () => {
+      finalChoiceMade = true;
+      setTimeout(() => {
+        document.body.style.backgroundColor = "black";
+        finalPicked = true;
+      }, 15000);
+    };
+    finalPage.appendChild(btn);
+  });
+
+  container.appendChild(finalPage);
+}
+
 function nextPage() {
   const pages = document.querySelectorAll(".page");
   pages[currentPage].classList.remove("active");
   currentPage++;
+
+  if (currentPage < pages.length) {
+    pages[currentPage].classList.add("active");
+  } else {
+    const percentage = Math.round((score / questions.length) * 100);
+    const rank = getRank(percentage);
+    displayResults(percentage, rank);
+  }
+}
+
+function getRank(percentage) {
+  if (percentage >= 90) return "Real One";
+  if (percentage >= 70) return "Bestie";
+  if (percentage >= 50) return "Solid Friend";
+  if (percentage >= 30) return "Kinda Know Me";
+  return "Stranger";
+}
+
+function displayResults(percentage, rank) {
+  const resultsElement = document.getElementById("results");
+  resultsElement.innerHTML = `
+    Your score: ${score} out of ${questions.length}<br>
+    Percentage: ${percentage}%<br>
+    Rank: ${rank}
+  `;
+  nextPage();
+}
+
+window.onload = createQuiz;
 
   if (currentPage < pages.length) {
     pages[currentPage].classList.add("active");
