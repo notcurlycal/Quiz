@@ -1,102 +1,53 @@
-
+/* Basic Styling */
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
-  text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
+/* Quiz Container Styling */
+#quiz-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Page Styling */
 .page {
-  display: none;
-  padding: 20px;
+    display: none;
 }
 
 .page.active {
-  display: block;
+    display: block;
 }
 
-h1, h2 {
-  margin-top: 40px;
-  font-weight: bold;
-}
-
-h1 {
-  font-size: 2.5rem;
-}
-
-h2 {
-  font-size: 1.75rem;
-}
-
+/* Buttons Styling */
 button {
-  display: block;
-  margin: 10px auto;
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 8px;
-  background-color: #6200ea;
-  color: white;
-  transition: background-color 0.3s;
-  width: 80%;
-  max-width: 300px;
+    padding: 10px 20px;
+    margin: 10px 0;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 button:hover {
-  background-color: #3700b3;
+    background-color: #45a049;
 }
 
-button.choice.selected {
-  background-color: #03dac5;
-  color: black;
-}
-
-button.continue {
-  background-color: #03a9f4;
-}
-
-button.continue:hover {
-  background-color: #0288d1;
-}
-
-#finale h1, #finale p {
-  font-family: 'Creepster', cursive;
-  color: red;
-}
-
-#final-text {
-  color: limegreen;
-  font-size: 2rem;
-  margin-top: 20px;
-}
-
-#blackout {
-  display: none;
-  background: black;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 999;
-}
-
-#blackout.active {
-  display: block;
-}
-
-@media screen and (max-width: 600px) {
-  h1 {
-    font-size: 2rem;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  button {
-    font-size: 1rem;
-  }
+/* Responsive Design */
+@media (max-width: 600px) {
+    #quiz-container {
+        width: 100%;
+        padding: 10px;
+    }
+    button {
+        width: 100%;
+    }
 }
