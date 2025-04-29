@@ -79,7 +79,6 @@ function nextPage() {
   if (currentPage < pages.length) {
     pages[currentPage].classList.add("active");
   } else {
-    // TODO: Show results and final question (you can expand here)
     alert(`Quiz completed! You scored ${score} out of ${questions.length}`);
   }
 }
