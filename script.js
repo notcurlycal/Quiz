@@ -2,6 +2,8 @@ let currentPage = 0;
 let score = 0;
 let selected = null;
 
+const container = document.getElementById("quiz-container");
+
 const questions = [
   { q: "What is Curlycal’s real name?", a: [["Jamal Anderson", false], ["Jayden Avelino", true], ["Jayden Anderson", false], ["Jamal Avelino", false]] },
   { q: "What’s my favorite color?", a: [["Blue", false], ["Green", false], ["Red", true], ["Black", false]] },
@@ -31,7 +33,8 @@ const questions = [
 ];
 
 function createQuiz() {
-  const container = document.getElementById("quiz-container");
+  createTitleScreen();
+
   questions.forEach((q, idx) => {
     const section = document.createElement("section");
     section.className = "page";
@@ -71,6 +74,30 @@ function createQuiz() {
   });
 }
 
+function createTitleScreen() {
+  const titleScreen = document.createElement("section");
+  titleScreen.className = "page active";
+
+  const h1 = document.createElement("h1");
+  h1.style.fontWeight = "bold";
+  h1.textContent = "The Curlycal Quiz";
+  titleScreen.appendChild(h1);
+
+  const p = document.createElement("p");
+  p.textContent = "Are you a real or a fake: the ultimate question..";
+  titleScreen.appendChild(p);
+
+  const startBtn = document.createElement("button");
+  startBtn.className = "continue";
+  startBtn.textContent = "Start Quiz";
+  startBtn.onclick = () => {
+    nextPage();
+  };
+  titleScreen.appendChild(startBtn);
+
+  container.appendChild(titleScreen);
+}
+
 function nextPage() {
   const pages = document.querySelectorAll(".page");
   pages[currentPage].classList.remove("active");
@@ -84,3 +111,4 @@ function nextPage() {
 }
 
 window.onload = createQuiz;
+
