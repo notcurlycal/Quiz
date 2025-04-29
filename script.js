@@ -1,197 +1,218 @@
-let currentPage = 0;
-let score = 0;
-let selected = null;
-
-const container = document.getElementById("quiz-container");
-
+// Array of quiz questions and answers
 const questions = [
-  { q: "What is Curlycal’s real name?", a: [["Jamal Anderson", false], ["Jayden Avelino", true], ["Jayden Anderson", false], ["Jamal Avelino", false]] },
-  { q: "What’s my favorite color?", a: [["Blue", false], ["Green", false], ["Red", true], ["Black", false]] },
-  { q: "What’s my biggest fear?", a: [["Getting jumped while taking a piss", true], ["The dark", false], ["Spiders", false], ["Being rejected", false]] },
-  { q: "If I had an orange cat what would I name it? (male):", a: [["Ale", true], ["Timmy", false], ["Cory", false], ["Tamale", false]] },
-  { q: "What’s my favorite movie?", a: [["Star Wars", false], ["A Minecraft Movie", false], ["The Truman Show", false], ["Spider Verse Movie Series", true]] },
-  { q: "When is my birthday?", a: [["6/20", false], ["9/25", false], ["12/12", false], ["6/25", true]] },
-  { q: "If I had a million dollars, what’s the first thing I would buy?", a: [["Cat", false], ["House", false], ["PC", true], ["Food", false]] },
-  { q: "If I could have any superpower, which one would I pick?", a: [["Super speed", false], ["Teleportation", true], ["Flight", false], ["Super Strength", false]] },
-  { q: "What's one thing we always do together?", a: [["Play Roblox", true], ["Goon", false], ["Goon", false], ["Goon", false]] },
-  { q: "What’s my favorite fast food place?", a: [["Wendys", false], ["Burger King", false], ["Arbys", false], ["McDonalds", true]] },
-  { q: "Am I more of a cat person or a dog person?", a: [["Cat", true], ["Dog", false]] },
-  { q: "Would I rather live in the city or the countryside?", a: [["City", true], ["Country", false]] },
-  { q: "What’s one thing I hate doing?:", a: [["Going to school", false], ["Walking by myself somewhere", true], ["Drawing", false], ["Talking to sped people", false]] },
-  { q: "What’s my favorite ice cream flavor?", a: [["Strawberry", false], ["Mango mango mango mango", true], ["Chocolate", false], ["Vanilla", false]] },
-  { q: "If I could meet one celebrity, who would it be?", a: [["Drake", false], ["The Rock", false], ["Kendrick Lamar", true], ["Ice Spice", false]] },
-  { q: "Do I like horror movies, yes or no?", a: [["Yes", true], ["No", false]] },
-  { q: "What’s my biggest pet peeve?", a: [["Being late", false], ["Slow Drivers", false], ["Dishes in the sink", false], ["Chewing with mouth open/Loud chewers", true]] },
-  { q: "What app do I spend the most time on?", a: [["Instagram", true], ["Youtube", false], ["Discord", false], ["Roblox", false]] },
-  { q: "What’s my favorite holiday?", a: [["Christmas", false], ["Halloween", true], ["Easter", false], ["Thanksgiving", false]] },
-  { q: "Would I rather be super rich or super famous?", a: [["Super Rich", true], ["Super Famous", false]] },
-  { q: "What’s my favorite type of music?", a: [["K-pop", false], ["Rap/Hip Hop", true], ["Trill", false], ["Pop", false]] },
-  { q: "Favorite Sport?", a: [["Volleyball", false], ["Soccer", false], ["Basketball", true], ["American Football", false]] },
-  { q: "Favorite Chocolate?", a: [["M&Ms", false], ["KitKat", false], ["Snickers", false], ["Hersheys", true]] },
-  { q: "Do I like spicy food?", a: [["Yes", true], ["No", false]] },
-  { q: "Are you my favorite person in the world and do ily?", a: [["Yes, No", false], ["Yes, Yes", true], ["No, Yes", false], ["No, No", false]] }
+    {
+        question: "What is Curlycal’s real name?",
+        answers: ["Jamal Anderson", "Jayden Avelino", "Jayden Anderson", "Jamal Avelino"],
+        correctAnswer: "Jayden Avelino"
+    },
+    {
+        question: "What’s my favorite color?",
+        answers: ["Blue", "Green", "Red", "Black"],
+        correctAnswer: "Red"
+    },
+    {
+        question: "What’s my biggest fear?",
+        answers: ["Getting jumped while taking a piss", "The dark", "Spiders", "Being rejected"],
+        correctAnswer: "Getting jumped while taking a piss"
+    },
+    {
+        question: "If I had an orange cat what would I name it? (male):",
+        answers: ["Ale", "Timmy", "Cory", "Tamale"],
+        correctAnswer: "Ale"
+    },
+    {
+        question: "What’s my favorite movie?",
+        answers: ["Star Wars", "A Minecraft Movie", "The Truman Show", "Spider Verse Movie Series"],
+        correctAnswer: "Spider Verse Movie Series"
+    },
+    {
+        question: "When is my birthday?",
+        answers: ["6/20", "9/25", "12/12", "6/25"],
+        correctAnswer: "6/25"
+    },
+    {
+        question: "If I had a million dollars, what’s the first thing I would buy?",
+        answers: ["Cat", "House", "PC", "Food"],
+        correctAnswer: "PC"
+    },
+    {
+        question: "If I could have any superpower, which one would I pick?",
+        answers: ["Super speed", "Teleportation", "Flight", "Super Strength"],
+        correctAnswer: "Teleportation"
+    },
+    {
+        question: "What's one thing we always do together?",
+        answers: ["Play Roblox", "Goon", "Goon", "Goon"],
+        correctAnswer: "Play Roblox"
+    },
+    {
+        question: "What’s my favorite fast food place?",
+        answers: ["Wendys", "Burger King", "Arbys", "McDonalds"],
+        correctAnswer: "McDonalds"
+    },
+    {
+        question: "Am I more of a cat person or a dog person?",
+        answers: ["Cat", "Dog"],
+        correctAnswer: "Cat"
+    },
+    {
+        question: "Would I rather live in the city or the countryside?",
+        answers: ["City", "Country"],
+        correctAnswer: "City"
+    },
+    {
+        question: "What’s one thing I hate doing?:",
+        answers: ["Going to school", "Walking by myself somewhere", "Drawing", "Talking to sped people"],
+        correctAnswer: "Walking by myself somewhere"
+    },
+    {
+        question: "What’s my favorite ice cream flavor?",
+        answers: ["Strawberry", "Mango mango mango mango", "Chocolate", "Vanilla"],
+        correctAnswer: "Mango mango mango mango"
+    },
+    {
+        question: "If I could meet one celebrity, who would it be?",
+        answers: ["Drake", "The Rock", "Kendrick Lamar", "Ice Spice"],
+        correctAnswer: "Kendrick Lamar"
+    },
+    {
+        question: "Do I like horror movies, yes or no?",
+        answers: ["Yes", "No"],
+        correctAnswer: "Yes"
+    },
+    {
+        question: "What’s my biggest pet peeve?",
+        answers: ["Being late", "Slow Drivers", "Dishes in the sink", "Chewing with mouth open/Loud chewers"],
+        correctAnswer: "Chewing with mouth open/Loud chewers"
+    },
+    {
+        question: "What app do I spend the most time on?",
+        answers: ["Instagram", "Youtube", "Discord", "Roblox"],
+        correctAnswer: "Instagram"
+    },
+    {
+        question: "What’s my favorite holiday?",
+        answers: ["Christmas", "Halloween", "Easter", "Thanksgiving"],
+        correctAnswer: "Halloween"
+    },
+    {
+        question: "Would I rather be super rich or super famous?",
+        answers: ["Super Rich", "Super Famous"],
+        correctAnswer: "Super Rich"
+    },
+    {
+        question: "What’s my favorite type of music?",
+        answers: ["K-pop", "Rap/Hip Hop", "Trill", "Pop"],
+        correctAnswer: "Rap/Hip Hop"
+    },
+    {
+        question: "Favorite Sport?",
+        answers: ["Volleyball", "Soccer", "Basketball", "American Football"],
+        correctAnswer: "Basketball"
+    },
+    {
+        question: "Favorite Chocolate?",
+        answers: ["M&Ms", "KitKat", "Snickers", "Hersheys"],
+        correctAnswer: "Hersheys"
+    },
+    {
+        question: "Do I like spicy food?",
+        answers: ["Yes", "No"],
+        correctAnswer: "Yes"
+    },
+    {
+        question: "Are you my favorite person in the world and do ily?",
+        answers: ["Yes, No", "Yes, Yes", "No, Yes", "No, No"],
+        correctAnswer: "Yes, Yes"
+    }
 ];
 
-function createQuiz() {
-  createTitleScreen();
+let currentPage = 0;
+let correctAnswers = 0;
+let totalQuestions = questions.length;
 
-  questions.forEach((q, idx) => {
-    const section = document.createElement("section");
-    section.className = "page";
-    if (idx === 0) section.classList.add("active");
+function loadPage(pageIndex) {
+    const questionData = questions[pageIndex];
+    const quizContainer = document.getElementById('quiz-container');
+    
+    // Clear previous page
+    quizContainer.innerHTML = '';
 
-    const h2 = document.createElement("h2");
-    h2.textContent = q.q;
-    section.appendChild(h2);
-
-    q.a.forEach(([text, isCorrect]) => {
-      const btn = document.createElement("button");
-      btn.className = "choice";
-      btn.textContent = text;
-      btn.onclick = () => {
-        selected = isCorrect;
-        section.querySelectorAll(".choice").forEach(b => b.classList.remove("selected"));
-        btn.classList.add("selected");
-      };
-      section.appendChild(btn);
-    });
-
-    const cont = document.createElement("button");
-    cont.className = "continue";
-    cont.textContent = "Continue";
-    cont.onclick = () => {
-      if (selected !== null) {
-        if (selected) score++;
-        selected = null;
-        nextPage();
-      } else {
-        alert("Please select an answer.");
-      }
-    };
-    section.appendChild(cont);
-
-    container.appendChild(section);
-  });
-
-  createOutroPage();
-  createFinalPage();
+    if (pageIndex === 0) {
+        // Title screen
+        const titleScreen = document.createElement('div');
+        titleScreen.innerHTML = `
+            <h1>The Curlycal Quiz</h1>
+            <p>Are you a real or a fake: the ultimate question..</p>
+            <button onclick="nextPage()">Start Quiz</button>
+        `;
+        quizContainer.appendChild(titleScreen);
+    } else if (pageIndex < totalQuestions) {
+        // Question Page
+        const questionPage = document.createElement('div');
+        questionPage.classList.add('page');
+        questionPage.innerHTML = `
+            <h2 class="question-text">${questionData.question}</h2>
+            <div class="choices">
+                ${questionData.answers.map(answer => `
+                    <button class="choice" onclick="checkAnswer('${answer}', ${pageIndex})">${answer}</button>
+                `).join('')}
+            </div>
+        `;
+        quizContainer.appendChild(questionPage);
+    } else {
+        // Results Page
+        const resultsPage = document.createElement('div');
+        resultsPage.classList.add('page');
+        const percentage = Math.round((correctAnswers / totalQuestions) * 100);
+        const rank = getRank(percentage);
+        resultsPage.innerHTML = `
+            <h2>Your Results</h2>
+            <p>You got ${correctAnswers} out of ${totalQuestions} correct. (${percentage}%)</p>
+            <p>Your rank: ${rank}</p>
+            <p>Thanks for playing and now we can play Roblox or watch me play UltraKill, but now instead of you telling me, “You pick” instead.. You are picking.</p>
+            <button onclick="finalQuestion()">Proceed to Final Question</button>
+        `;
+        quizContainer.appendChild(resultsPage);
+    }
 }
 
-function createTitleScreen() {
-  const titleScreen = document.createElement("section");
-  titleScreen.className = "page active";
-
-  const h1 = document.createElement("h1");
-  h1.style.fontWeight = "bold";
-  h1.textContent = "The Curlycal Quiz";
-  titleScreen.appendChild(h1);
-
-  const p = document.createElement("p");
-  p.textContent = "Are you a real or a fake: the ultimate question..";
-  titleScreen.appendChild(p);
-
-  const startBtn = document.createElement("button");
-  startBtn.className = "continue";
-  startBtn.textContent = "Start Quiz";
-  startBtn.onclick = () => {
+function checkAnswer(answer, pageIndex) {
+    if (answer === questions[pageIndex].correctAnswer) {
+        correctAnswers++;
+    }
     nextPage();
-  };
-  titleScreen.appendChild(startBtn);
-
-  container.appendChild(titleScreen);
-}
-
-function createOutroPage() {
-  const outro = document.createElement("section");
-  outro.className = "page";
-
-  const h2 = document.createElement("h2");
-  h2.textContent = "Your Results";
-  outro.appendChild(h2);
-
-  const p = document.createElement("p");
-  p.id = "results";
-  outro.appendChild(p);
-
-  const smallText = document.createElement("p");
-  smallText.innerText = "Thanks for playing and now we can play roblox or watch me play ultrakill, but now instead of you telling me, 'You pick' instead.. You are picking.";
-  outro.appendChild(smallText);
-
-  container.appendChild(outro);
-}
-
-function createFinalPage() {
-  const finalPage = document.createElement("section");
-  finalPage.className = "page";
-
-  const h2 = document.createElement("h2");
-  h2.style.color = "red";
-  h2.style.fontFamily = "cursive";
-  h2.textContent = "FINAL QUESTION";
-  finalPage.appendChild(h2);
-
-  const small = document.createElement("p");
-  small.style.color = "red";
-  small.style.fontFamily = "cursive";
-  small.innerText = "Choose now.";
-  finalPage.appendChild(small);
-
-  ["Roblox", "Ultrakill"].forEach(option => {
-    const btn = document.createElement("button");
-    btn.textContent = option;
-    btn.onclick = () => {
-      finalChoiceMade = true;
-      setTimeout(() => {
-        document.body.style.backgroundColor = "black";
-        finalPicked = true;
-      }, 15000);
-    };
-    finalPage.appendChild(btn);
-  });
-
-  container.appendChild(finalPage);
 }
 
 function nextPage() {
-  const pages = document.querySelectorAll(".page");
-  pages[currentPage].classList.remove("active");
-  currentPage++;
-
-  if (currentPage < pages.length) {
-    pages[currentPage].classList.add("active");
-  } else {
-    const percentage = Math.round((score / questions.length) * 100);
-    const rank = getRank(percentage);
-    displayResults(percentage, rank);
-  }
+    currentPage++;
+    loadPage(currentPage);
 }
 
 function getRank(percentage) {
-  if (percentage >= 90) return "Real One";
-  if (percentage >= 70) return "Bestie";
-  if (percentage >= 50) return "Solid Friend";
-  if (percentage >= 30) return "Kinda Know Me";
-  return "Stranger";
+    if (percentage >= 84) return "Real One";
+    if (percentage >= 64) return "Bestie";
+    if (percentage >= 44) return "Solid Friend";
+    if (percentage >= 24) return "Kinda Know Me";
+    return "Stranger";
 }
 
-function displayResults(percentage, rank) {
-  const resultsElement = document.getElementById("results");
-  resultsElement.innerHTML = `
-    Your score: ${score} out of ${questions.length}<br>
-    Percentage: ${percentage}%<br>
-    Rank: ${rank}
-  `;
-  nextPage();
+function finalQuestion() {
+    const quizContainer = document.getElementById('quiz-container');
+    quizContainer.innerHTML = `
+        <h1 style="color: red; font-size: 50px; font-family: 'Creepster', sans-serif;">FINAL QUESTION</h1>
+        <div class="choices">
+            <button class="choice">Roblox</button>
+            <button class="choice">Ultrakill</button>
+        </div>
+        <p style="font-size: 24px; color: red; font-family: 'Creepster', sans-serif;">Choose now.</p>
+    `;
+    setTimeout(() => {
+        alert("OK ^_^");
+        setTimeout(() => {
+            document.body.style.backgroundColor = "black";
+        }, 1500);
+    }, 1500);
 }
 
-window.onload = createQuiz;
-
-  if (currentPage < pages.length) {
-    pages[currentPage].classList.add("active");
-  } else {
-    alert(`Quiz completed! You scored ${score} out of ${questions.length}`);
-  }
-}
-
-window.onload = createQuiz;
-
+loadPage(currentPage);
