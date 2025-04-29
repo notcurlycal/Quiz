@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Curlycal Quiz</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+</head>
+<body>
+  <section class="page active" id="page-0">
+    <h1>The Curlycal Quiz</h1>
+    <h2>Are you a real or a fake: the ultimate question..</h2>
+    <button class="continue" onclick="nextPage()">Continue</button>
+  </section>
+
+  <section class="page" id="results">
+    <h2 id="result-title"></h2>
+    <p id="result-detail"></p>
+    <p id="result-rank"></p>
+    <p>Thanks for playing and now we can play roblox or watch me play ultrakill, but now instead of you telling me, “You pick” instead.. You are picking.</p>
+    <button class="continue" onclick="nextPage()">Continue</button>
+  </section>
+
+  <section class="page" id="finale">
+    <h1>FINAL QUESTION</h1>
+    <p>Choose now.</p>
+    <button onclick="finalChoice()">Roblox</button>
+    <button onclick="finalChoice()">Ultrakill</button>
+    <div id="final-text"></div>
+  </section>
+
+  <section class="page" id="blackout"></section>
+
+  <script>
+    const questions = [
+      { q: "What is Curlycal’s real name?", a: [["Jamal Anderson", false], ["Jayden Avelino", true], ["Jayden Anderson", false], ["Jamal Avelino", false]] },
+      { q: "What’s my favorite color?", a: [["Blue", false], ["Green", false], ["Red", true], ["Black", false]] },
+      { q: "What’s my biggest fear?", a: [["Getting jumped while taking a piss", true], ["The dark", false], ["Spiders", false], ["Being rejected", false]] },
+      { q: "If I had an orange cat what would I name it? (male):", a: [["Ale", true], ["Timmy", false], ["Cory", false], ["Tamale", false]] },
+      { q: "What’s my favorite movie?", a: [["Star Wars", false], ["A Minecraft Movie", false], ["The Truman Show", false], ["Spider Verse Movie Series", true]] },
+      { q: "When is my birthday?", a: [["6/20", false], ["9/25", false], ["12/12", false], ["6/25", true]] },
+      { q: "If I had a million dollars, what’s the first thing I would buy?", a: [["Cat", false], ["House", false], ["PC", true], ["Food", false]] },
+      { q: "If I could have any superpower, which one would I pick?", a: [["Super speed", false], ["Teleportation", true], ["Flight", false], ["Super Strength", false]] },
+      { q: "What's one thing we always do together?", a: [["Play Roblox", true], ["Goon", false], ["Goon", false], ["Goon", false]] },
+      { q: "What’s my favorite fast food place?", a: [["Wendys", false], ["Burger King", false], ["Arbys", false], ["McDonalds", true]] },
+      { q: "Am I more of a cat person or a dog person?", a: [["Cat", true], ["Dog", false]] },
+      { q: "Would I rather live in the city or the countryside?", a: [["City", true], ["Country", false]] },
+      { q: "What’s one thing I hate doing?:", a: [["Going to school", false], ["Walking by myself somewhere", true], ["Drawing", false], ["Talking to sped people", false]] },
+      { q: "What’s my favorite ice cream flavor?", a: [["Strawberry", false], ["Mango mango mango mango", true], ["Chocolate", false], ["Vanilla", false]] },
+      { q: "If I could meet one celebrity, who would it be?", a: [["Drake", false], ["The Rock", false], ["Kendrick Lamar", true], ["Ice Spice", false]] },
+      { q: "Do I like horror movies, yes or no?", a: [["Yes", true], ["No", false]] },
+      { q: "What’s my biggest pet peeve?", a: [["Being late", false], ["Slow Drivers", false], ["Dishes in the sink", false], ["Chewing with mouth open/Loud chewers", true]] },
+      { q: "What app do I spend the most time on?", a: [["Instagram", true], ["Youtube", false], ["Discord", false], ["Roblox", false]] },
+      { q: "What’s my favorite holiday?", a: [["Christmas", false], ["Halloween", true], ["Easter", false], ["Thanksgiving", false]] },
+      { q: "Would I rather be super rich or super famous?", a: [["Super Rich", true], ["Super Famous", false]] },
+      { q: "What’s my favorite type of music?", a: [["K-pop", false], ["Rap/Hip Hop", true], ["Trill", false], ["Pop", false]] },
+      { q: "Favorite Sport?", a: [["Volleyball", false], ["Soccer", false], ["Basketball", true], ["American Football", false]] },
+      { q: "Favorite Chocolate?", a: [["M&Ms", false], ["KitKat", false], ["Snickers", false], ["Hersheys", true]] },
+      { q: "Do I like spicy food?", a: [["Yes", true], ["No", false]] },
+      { q: "Are you my favorite person in the world and do ily?", a: [["Yes, No", false], ["Yes, Yes", true], ["No, Yes", false], ["No, No", false]] }
+    ];
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
